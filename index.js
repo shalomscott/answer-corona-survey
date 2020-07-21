@@ -28,7 +28,7 @@ getSurvey()
             );
             img.colorRegions(50);
           },
-          model_file: `file:///${__dirname}/captcha-solver/cbl-model.dat`,
+          model_file: `file:///${__dirname}/cbl-model.dat`,
           character_set: "0123456789",
           blob_min_pixels: 40,
           exact_characters: 4,
