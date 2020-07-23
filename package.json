@@ -1,16 +1,15 @@
 {
-  "name": "answer-corona-survey",
-  "version": "1.0.0",
-  "description": "You are feeling great. In fact you are SO good, never been better. You really do not need that survey, let me take care of it.",
-  "scripts": {
-    "start": "node --insecure-http-parser -r dotenv/config index.js"
-  },
-  "author": "Shalom Steinbach",
-  "license": "ISC",
-  "dependencies": {
-    "canvas": "^2.6.1",
-    "dotenv": "^8.2.0",
-    "jsdom": "^16.3.0",
-    "node-fetch": "^2.6.0"
-  }
+	"name": "answer-corona-survey",
+	"version": "1.0.0",
+	"description": "You are feeling great. In fact you are SO good, never been better. You really do not need that survey. Let me take care of it.",
+	"scripts": {
+		"start": "node --insecure-http-parser -r dotenv/config index.js"
+	},
+	"author": "Shalom Steinbach",
+	"dependencies": {
+		"canvas": "^2.6.1",
+		"dotenv": "^8.2.0",
+		"jsdom": "^16.3.0",
+		"node-fetch": "^2.6.0"
+	}
 }
