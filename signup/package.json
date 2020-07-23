@@ -1,0 +1,11 @@
+{
+	"name": "answer-corona-survey-signup",
+	"version": "1.0.0",
+	"author": "Shalom Steinbach",
+	"dependencies": {
+		"@koa/router": "^9.3.1",
+		"koa": "^2.13.0",
+		"koa-static": "^5.0.0",
+		"serverless-http": "^2.5.0"
+	}
+}

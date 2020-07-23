@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"description": "You are feeling great. In fact you are SO good, never been better. You really do not need that survey. Let me take care of it.",
 	"scripts": {
-		"start": "node --insecure-http-parser -r dotenv/config index.js"
+		"start": "node --insecure-http-parser -r dotenv/config index.js",
+		"deploy": "./deploy.sh"
 	},
 	"author": "Shalom Steinbach",
 	"dependencies": {
