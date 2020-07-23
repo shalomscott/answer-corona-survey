@@ -2,15 +2,18 @@
 	"name": "answer-corona-survey",
 	"version": "1.0.0",
 	"description": "You are feeling great. In fact you are SO good, never been better. You really do not need that survey. Let me take care of it.",
+	"author": "Shalom Steinbach",
 	"scripts": {
-		"start": "node --insecure-http-parser -r dotenv/config index.js",
+		"dev": "sam local start-api",
 		"deploy": "./deploy.sh"
 	},
-	"author": "Shalom Steinbach",
 	"dependencies": {
-		"canvas": "^2.6.1",
-		"dotenv": "^8.2.0",
-		"jsdom": "^16.3.0",
-		"node-fetch": "^2.6.0"
+		"@koa/router": "^9.3.1",
+		"koa": "^2.13.0",
+		"koa-static": "^5.0.0",
+		"koa-views": "^6.3.0",
+		"node-fetch": "^2.6.0",
+		"nunjucks": "^3.2.2",
+		"serverless-http": "^2.5.0"
 	}
 }

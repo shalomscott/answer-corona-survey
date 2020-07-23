@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Answer Corona Survey</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script type="text/javascript" src="/cbl.min.js"></script>
+	</head>
+	<body>
+		<h1>Dear User,</h1>
+		<p>Your request is being processed. Please ignore the image below.</p>
+		<img id="captcha" src="data:image/jpeg;base64,{% imageData %}" />
+		<script>
+			const cbl = new CBL({
+				preprocess(img) {
+					img.binarize(60);
+					img.convolute(
+						[
+							[0, 1, 0],
+							[1, 2, 1],
+							[0, 1, 0]
+						],
+						1 / 6
+					);
+					img.colorRegions(50);
+				},
+				model_file: '/cbl-model.dat',
+				character_set: '0123456789',
+				blob_min_pixels: 40,
+				exact_characters: 4,
+				blob_max_pixels: 400,
+				pattern_width: 25,
+				pattern_height: 25,
+				perceptive_colorspace: true,
+				model_loaded: () => cbl.solve('captcha').done(sendResponse)
+			});
+
+			async function sendResponse(solution) {
+				await fetch('/{% tz %}/solution', { method: 'POST' });
+				location.replace('/done');
+			}
+		</script>
+	</body>
+</html>
