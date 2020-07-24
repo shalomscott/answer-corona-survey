@@ -4,7 +4,7 @@
 	"description": "You are feeling great. In fact you are SO good, never been better. You really do not need that survey. Let me take care of it.",
 	"author": "Shalom Steinbach",
 	"scripts": {
-		"dev": "sam local start-api",
+		"dev": "sam local start-api -s false",
 		"deploy": "./deploy.sh"
 	},
 	"dependencies": {

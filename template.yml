@@ -9,26 +9,26 @@ Resources:
       CodeUri: .
       Handler: lambda.handler
       Runtime: nodejs12.x
-      Timeout: 5
+      Timeout: 10
       Environment:
         Variables:
           NODE_OPTIONS: '--insecure-http-parser'
-          # DYNAMODB_TABLE: !Ref Table
-      # Policies:
-      #   - DynamoDBCrudPolicy:
-      #       TableName: !Ref Table
+          DYNAMODB_TABLE: !Ref Table
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Table
       Events:
         Request:
           Type: Api
           Properties:
             Path: /{path+}
             Method: any
-  # Table:
-  #   Type: AWS::Serverless::SimpleTable
-  #   Properties:
-  #     PrimaryKey:
-  #       Name: tz
-  #       Type: Number
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: 5
-  #       WriteCapacityUnits: 5
+  Table:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: tz
+        Type: Number
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5

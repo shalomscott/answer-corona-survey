@@ -8,7 +8,7 @@
 	<body>
 		<h1>Dear User,</h1>
 		<p>Your request is being processed. Please ignore the image below.</p>
-		<img id="captcha" src="data:image/jpeg;base64,{% imageData %}" />
+		<img id="captcha" src="data:image/jpeg;base64,{{ imageData }}" />
 		<script>
 			const cbl = new CBL({
 				preprocess(img) {
@@ -35,7 +35,10 @@
 			});
 
 			async function sendResponse(solution) {
-				await fetch('/{% tz %}/solution', { method: 'POST' });
+				await fetch('/{{ tz }}/solution', {
+					method: 'POST',
+					body: solution
+				});
 				location.replace('/done');
 			}
 		</script>
