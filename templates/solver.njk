@@ -3,7 +3,7 @@
 	<head>
 		<title>Answer Corona Survey</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script type="text/javascript" src="/cbl.min.js"></script>
+		<script type="text/javascript" src="./cbl.min.js"></script>
 	</head>
 	<body>
 		<h1>Dear User,</h1>
@@ -23,7 +23,7 @@
 					);
 					img.colorRegions(50);
 				},
-				model_file: '/cbl-model.dat',
+				model_file: './cbl-model.dat',
 				character_set: '0123456789',
 				blob_min_pixels: 40,
 				exact_characters: 4,
@@ -35,11 +35,11 @@
 			});
 
 			async function sendResponse(solution) {
-				await fetch('/{{ tz }}/solution', {
+				await fetch('./{{ tz }}/solution', {
 					method: 'POST',
 					body: solution
 				});
-				location.replace('/done');
+				location.replace('./done');
 			}
 		</script>
 	</body>

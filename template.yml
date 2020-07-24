@@ -28,7 +28,7 @@ Resources:
     Properties:
       PrimaryKey:
         Name: tz
-        Type: Number
+        Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
