@@ -4,6 +4,7 @@
 		<title>Answer Corona Survey</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script type="text/javascript" src="./cbl.min.js"></script>
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
 		<h1>Dear User,</h1>
@@ -31,16 +32,13 @@
 				pattern_width: 25,
 				pattern_height: 25,
 				perceptive_colorspace: true,
-				model_loaded: () => cbl.solve('captcha').done(sendResponse)
+				model_loaded: () =>
+					cbl
+						.solve('captcha')
+						.done((solution) =>
+							location.replace(`./{{ tz }}/done?solution=${solution}`)
+						)
 			});
-
-			async function sendResponse(solution) {
-				await fetch('./{{ tz }}/solution', {
-					method: 'POST',
-					body: solution
-				});
-				location.replace('./done');
-			}
 		</script>
 	</body>
 </html>

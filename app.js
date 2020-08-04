@@ -4,17 +4,12 @@ const Koa = require('koa');
 const serve = require('koa-static');
 const views = require('koa-views');
 const router = new (require('@koa/router'))();
-const body = require('koa-body');
 const app = new Koa();
 
 const { getSurvey, getCaptcha, submitSurvey } = require('./utils/requests.js');
-const dowload = require('./utils/download-file.js');
+const download = require('./utils/download-file.js');
 const base64 = require('./utils/base64-encode.js');
 const { saveCookies, getCookies } = require('./utils/cookies-db.js');
-
-router.get('/done', async (ctx) => {
-	return ctx.render('done.njk');
-});
 
 router.get('/:tz', async (ctx) => {
 	const { tz } = ctx.params;
@@ -23,7 +18,7 @@ router.get('/:tz', async (ctx) => {
 	const cookies = (await getSurvey()).headers.raw()['set-cookie'].join(';');
 	console.log('Retrieved some cookies:\n' + cookies);
 
-	await getCaptcha(cookies).then(dowload(captchaPath));
+	await getCaptcha(cookies).then(download(captchaPath));
 	console.log('Finished downloading captcha.jpeg');
 
 	const [imageData] = await Promise.all([
@@ -35,21 +30,20 @@ router.get('/:tz', async (ctx) => {
 	return ctx.render('solver.njk', { tz, imageData });
 });
 
-router.post('/:tz/solution', body(), async (ctx) => {
+router.get('/:tz/done', async (ctx) => {
 	const { tz } = ctx.params;
-	const solution = ctx.request.body;
+	const { solution } = ctx.query;
 	console.log(`Got captcha solution ${solution} for ${tz}`);
 
 	const cookies = await getCookies(tz);
 	console.log(`Retrieved cookies for ${tz}`);
 
-	const res = await submitSurvey(cookies, solution, tz).then((res) =>
+	const response = await submitSurvey(cookies, solution, tz).then((res) =>
 		res.text()
 	);
-	console.log('Got final response: ' + res);
+	console.log('Got final response: ' + response);
 
-	ctx.status = 200;
-	ctx.body = '';
+	return ctx.render('done.njk');
 });
 
 app
